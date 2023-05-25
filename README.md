@@ -1,2 +1,8 @@
 # quickparsejs
 math expression parsing for javascript
+# API
+qp.parseExpression(string expression)
+Evaluates a mathematical expression from a string, using four-function operations.
+
+qp.parseCustomOperators(string expression, string add, string subtract, string multiply, string divide)
+Evaluates a mathematical expression from a string, with custom operators to be considered instead of + - * /.
