@@ -1,0 +1,22 @@
+{
+  "name": "quickparsejs",
+  "version": "1.0.0",
+  "description": "mathematical expression parsing for javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoomKitty87/quickparsejs.git"
+  },
+  "keywords": [
+    "math"
+  ],
+  "author": "Ansel Stanik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoomKitty87/quickparsejs/issues"
+  },
+  "homepage": "https://github.com/DoomKitty87/quickparsejs#readme"
+}
