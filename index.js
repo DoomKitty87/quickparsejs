@@ -291,3 +291,155 @@ exports.prepareExpression = function(expression, defaultOperator) {
     }
   }
 }
+
+function parseRecursive(expression) {
+  var expressionout = expression;
+
+  for (var i = 0; i < expressionout.length(); i++) {
+    if (expressionout[i] == '*') {
+      var multbefore = "";
+      var curr = expressionout[i - 1];
+      var j = i - 1;
+      while (curr != ' ' && curr != '*' && curr != '/' && curr != '+' && curr != '-' && j >= 0) {
+        multbefore += curr;
+        j--;
+        curr = expressionout[j];
+      }
+      multbefore = multbefore.split().reverse().join();
+      var multafter = "";
+      curr = expressionout[i + 1];
+      j = i + 1;
+      while (curr != ' ' && curr != '*' && curr != '/' && curr != '+' && curr != '-' && j < expressionout.length()) {
+        multafter += curr;
+        j++;
+        curr = expressionout[j];
+      }
+      var mult1 = parseInt(multbefore);
+      var mult2 = parseInt(multafter);
+      expressionout[i] = ' ';
+      for (var k = 1; k <= multbefore.length(); k++) {
+        expressionout[i - k] = ' ';
+      }
+      for (var k = 1; k <= multafter.length(); k++) {
+        expressionout[i + k] = ' ';
+      }
+      expressionout = expressionout.substr(0, i) + (mult1 * mult2).toString() + expressionout.substr(i);
+      i--;
+      expressionout = expressionout.replace(/\s+/g, '');
+    }
+    else if (expressionout[i] == '/') {
+      var divbefore = "";
+      var curr = expressionout[i - 1];
+      var j = i - 1;
+      while (curr != ' ' && curr != '*' && curr != '/' && curr != '+' && curr != '-' && j >= 0) {
+        divbefore += curr;
+        j--;
+        curr = expressionout[j];
+      }
+      divbefore = divbefore.split().reverse().join();
+      var divafter = "";
+      curr = expressionout[i + 1];
+      j = i + 1;
+      while (curr != ' ' && curr != '*' && curr != '/' && curr != '+' && curr != '-' && j < expressionout.length()) {
+        divafter += curr;
+        j++;
+        curr = expressionout[j];
+      }
+      var div1 = parseInt(divbefore);
+      var div2 = parseInt(divafter);
+      expressionout[i] = ' ';
+      for (var k = 1; k <= divbefore.length(); k++) {
+        expressionout[i - k] = ' ';
+      }
+      for (var k = 1; k <= divafter.length(); k++) {
+        expressionout[i + k] = ' ';
+      }
+      expressionout = expressionout.substr(0, i) + (div1 / div2).toString() + expressionout.substr(i);
+      i--;
+      expressionout = expressionout.replace(/\s+/g, '');
+    }
+    else if (expressionout[i] == '(') {
+      var parenthesesCount = 1;
+      var j = 1;
+      while (parenthesesCount > 0) {
+        if (expressionout[i + j] == '(') parenthesesCount++;
+        else if (expressionout[i + j] == ')') parenthesesCount--;
+        j++;
+      }
+      var inRecursive = expressionout.substring(i + 1, i + j - 1);
+      var evaluation = parseRecursive(inRecursive);
+      expressionout = expressionout.substring(0, i) + evaluation + expressionout.substring(i + j);
+    }
+  }
+  for (var i = 0; i < expressionout.length(); i++) {
+    if (expressionout[i] == '+') {
+      var addbefore = "";
+      var curr = expressionout[i - 1];
+      var j = i - 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && j >= 0) {
+        addbefore += curr;
+        j--;
+        curr = expressionout[j];
+      }
+      addbefore = addbefore.split().reverse().join();
+      var addafter = "";
+      curr = expressionout[i + 1];
+      j = i + 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && j < expressionout.length()) {
+        addafter += curr;
+        j++;
+        curr = expressionout[j];
+      }
+      var add1 = parseInt(addbefore);
+      var add2 = parseInt(addafter);
+      expressionout[i] = ' ';
+      for (var k = 1; k <= addbefore.length(); k++) {
+        expressionout[i - k] = ' ';
+      }
+      for (var k = 1; k <= addafter.length(); k++) {
+        expressionout[i + k] = ' ';
+      }
+      expressionout = expressionout.substr(0, i) + (add1 + add2).toString() + expressionout.substr();
+      i--;
+      expressionout = expressionout.replace(/\s+/g, '');
+    }
+    else if (expressionout[i] == '-') {
+      var subbefore = "";
+      var curr = expressionout[i - 1];
+      var j = i - 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && j >= 0) {
+        subbefore += curr;
+        j--;
+        curr = expressionout[j];
+      }
+      subbefore = subbefore.split().reverse().join();
+      var subafter = "";
+      curr = expressionout[i + 1];
+      j = i + 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && j < expressionout.length()) {
+        subafter += curr;
+        j++;
+        curr = expressionout[j];
+      }
+      var sub1 = parseInt(subbefore);
+      var sub2 = parseInt(subafter);
+      expressionout[i] = ' ';
+      for (var k = 1; k <= subbefore.length(); k++) {
+        expressionout[i - k] = ' ';
+      }
+      for (var k = 1; k <= subafter.length(); k++) {
+        expressionout[i + k] = ' ';
+      }
+      expressionout = expressionout.substr(0, i) + (sub1 + sub2).toString() + expressionout.substr();
+      i--;
+      expressionout = expressionout.replace(/\s+/g, '');
+    }
+  }
+
+  return expressionout;
+}
+
+exports.parseWithParentheses = function(expression) {
+  if (typeof expression != "string") throw new TypeError("Input must be a string.");
+  return parseFloat(parseRecursive(expression));
+}
