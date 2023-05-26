@@ -278,3 +278,16 @@ exports.parseCustomOperators = function(expression, add, subtract, multiply, div
   }
   return parseFloat(expressionout);
 }
+
+exports.prepareExpression = function(expression, defaultOperator) {
+  if (typeof expression != "string") throw new TypeError("Input must be a string.");
+  if (typeof defaultOperator != "string") throw new TypeError("Default operator must be a string.");
+  if (defaultOperator.length() != 1) throw new RangeError("Default operator must be one character.");
+
+  var expressionout = expression;
+  for (var i = 0; i < expressionout.length; i++) {
+    if (!(expressionout[i] >= '0' && expressionout[i] <= '9')) {
+      expressionout[i] = defaultOperator;
+    }
+  }
+}

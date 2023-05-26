@@ -6,3 +6,6 @@ Evaluates a mathematical expression from a string, using four-function operation
 
 qp.parseCustomOperators(string expression, string add, string subtract, string multiply, string divide)
 Evaluates a mathematical expression from a string, with custom operators to be considered instead of + - * /.
+
+qp.prepareExpression(string expression, char defaultOperator)
+Prepares a string for evaluation by setting all non-numeric characters to a specified operator.
