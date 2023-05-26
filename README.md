@@ -9,3 +9,6 @@ Evaluates a mathematical expression from a string, with custom operators to be c
 
 qp.prepareExpression(string expression, char defaultOperator)
 Prepares a string for evaluation by setting all non-numeric characters to a specified operator.
+
+qp.parseWithParentheses(string expression)
+Evaluates a mathematical expression from a string, with support for parentheses. Will return bad results if parentheses are not closed.
