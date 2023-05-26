@@ -12,3 +12,6 @@ Prepares a string for evaluation by setting all non-numeric characters to a spec
 
 qp.parseWithParentheses(string expression)
 Evaluates a mathematical expression from a string, with support for parentheses. Will return bad results if parentheses are not closed.
+
+qp.parseWithParenthesesCustom(string expression, string add, string subtract, string multiply, string divide, string open, string close)
+Same as parseCustomOperators, but with support for parentheses (and using custom parentheses instead).
