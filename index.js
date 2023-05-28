@@ -689,3 +689,24 @@ exports.parseScientific = function(expression) {
 
   return expressionout;
 }
+
+exports.parseSpecialConstants = function(expression) {
+  var expressionout = expression;
+
+  for (var i = 0; i < expressionout.length(); i++) {
+    if (i < expressionout.length() - 1 && expressionout[i].toLowerCase == 'p' && expressionout[i + 1].toLowerCase == 'i') {
+      expressionout = expressionout.substr(0, i) + Math.PI.toString() + expressionout.substr(i + 2);
+      i += Math.PI.toString().length() - 2;
+    }
+    else if (expressionout[i].toLowerCase == 'e') {
+      expressionout = expressionout.substr(0, i) + Math.E.toString() + expressionout.substr(i + 1);
+      i += Math.E.toString().length() - 1;
+    }
+    else if (expressionout[i] == 'π') {
+      expressionout = expressionout.substr(0, i) + Math.PI.toString() + expressionout.substr(i + 1);
+      i += Math.PI.toString().length() - 1;
+    }
+  }
+
+  return expressionout;
+}

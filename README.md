@@ -27,3 +27,6 @@ Converts all scientific notation expressions in the given string to their decima
 
 qp.parseScientificSingle(string expression)
 Returns decimal value of a number expressed in scientific notation. (ex. 1.2e9)
+
+qp.parseSpecialConstants(string expression)
+Replaces constants (ie. π, e) in an expression with their decimal values.
