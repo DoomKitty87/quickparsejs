@@ -1,6 +1,6 @@
 {
   "name": "quickparsejs",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "mathematical expression parsing for javascript",
   "main": "index.js",
   "scripts": {
