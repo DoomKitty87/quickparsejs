@@ -619,3 +619,20 @@ exports.parseWithVariable = function(expression, variable, variableValue) {
   expressionout = expressionout.replace(variable, variableValue.toString());
   return parseFloat(parseRecursive(expressionout));
 }
+
+exports.parseMultipleVariables = function(expression, variables, variableValues) {
+  if (typeof expression != "string") throw new TypeError("Input must be a string.");
+  if (!Array.isArray(variables)) throw new TypeError("Variables must be an array.");
+  if (!Array.isArray(variableValues)) throw new TypeError("Variable values must be an array.");
+  if (variables.length != variableValues.length) throw new RangeError("Variables and variable values must be the same length.");
+  if (variables.length == 0) throw new RangeError("Variables and variable values must not be empty.");
+  if (typeof variables[0] != "string") throw new TypeError("Variables must be strings.");
+  if (typeof variableValues[0] != "number") throw new TypeError("Variable values must be numbers.");
+
+  var expressionout = expression;
+  for (var i = 0; i < variables.length; i++) {
+    expressionout = expressionout.replace(variables[i], variableValues[i].toString());
+  }
+
+  return parseFloat(parseRecursive(expressionout));
+}
