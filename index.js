@@ -636,3 +636,16 @@ exports.parseMultipleVariables = function(expression, variables, variableValues)
 
   return parseFloat(parseRecursive(expressionout));
 }
+
+exports.parseScientific = function(expression) {
+  var expressionout = expression;
+
+  for (var i = 0; i < expressionout.length(); i++) {
+    if (expressionout[i] == "e" || expressionout[i] == "E") {
+      expressionout = parseFloat(expressionout.substr(0, i)) * Math.pow(10, parseFloat(expressionout.substr(i + 1)));
+      break; 
+    }
+  }
+
+  return expressionout;
+}
