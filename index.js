@@ -609,3 +609,13 @@ exports.parseWithParenthesesCustom = function(expression, add, subtract, multipl
 
   return parseFloat(parseRecursiveCustom(expression, add, subtract, multiply, divide, open, close));
 }
+
+exports.parseWithVariable = function(expression, variable, variableValue) {
+  if (typeof expression != "string") throw new TypeError("Input must be a string.");
+  if (typeof variable != "string") throw new TypeError("Variable must be a string.");
+  if (typeof variableValue != "number") throw new TypeError("Variable value must be a number.");
+
+  var expressionout = expression;
+  expressionout = expressionout.replace(variable, variableValue.toString());
+  return parseFloat(parseRecursive(expressionout));
+}
