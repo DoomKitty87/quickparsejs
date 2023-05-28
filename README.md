@@ -15,3 +15,9 @@ Evaluates a mathematical expression from a string, with support for parentheses.
 
 qp.parseWithParenthesesCustom(string expression, string add, string subtract, string multiply, string divide, string open, string close)
 Same as parseCustomOperators, but with support for parentheses (and using custom parentheses instead).
+
+qp.parseWithVariable(string expression, string variable, float variableValue)
+Evaluate mathematical expression, first replacing instances of a variable with its value. Supports parentheses.
+
+qp.parseMultipleVariables(string expression, string[] variables, float[] variableValues)
+Evaluate mathematical expression, first replacing instances of all supplied variables with their respective values. Supports parentheses.
