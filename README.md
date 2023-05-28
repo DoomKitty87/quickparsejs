@@ -23,4 +23,7 @@ qp.parseMultipleVariables(string expression, string[] variables, float[] variabl
 Evaluate mathematical expression, first replacing instances of all supplied variables with their respective values. Supports parentheses.
 
 qp.parseScientific(string expression)
+Converts all scientific notation expressions in the given string to their decimal values.
+
+qp.parseScientificSingle(string expression)
 Returns decimal value of a number expressed in scientific notation. (ex. 1.2e9)

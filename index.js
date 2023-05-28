@@ -32,7 +32,7 @@ exports.parseExpression = function(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (mult1 * mult2).toString() + expressionout.substr(i);
-      i--;
+      i -= multbefore.length() + multafter.length() + 1 - (mult1 * mult2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == '/') {
@@ -63,7 +63,7 @@ exports.parseExpression = function(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (div1 / div2).toString() + expressionout.substr(i);
-      i--;
+      i -= divbefore.length() + divafter.length() + 1 - (div1 / div2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -96,7 +96,7 @@ exports.parseExpression = function(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (add1 + add2).toString() + expressionout.substr();
-      i--;
+      i -= addbefore.length() + addafter.length() + 1 - (add1 + add2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == '-') {
@@ -126,8 +126,8 @@ exports.parseExpression = function(expression) {
       for (var k = 1; k <= subafter.length(); k++) {
         expressionout[i + k] = ' ';
       }
-      expressionout = expressionout.substr(0, i) + (sub1 + sub2).toString() + expressionout.substr();
-      i--;
+      expressionout = expressionout.substr(0, i) + (sub1 - sub2).toString() + expressionout.substr();
+      i -= subbefore.length() + subafter.length() + 1 - (sub1 - sub2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -177,7 +177,7 @@ exports.parseCustomOperators = function(expression, add, subtract, multiply, div
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (mult1 * mult2).toString() + expressionout.substr(i);
-      i--;
+      i -= multbefore.length() + multafter.length() + 1 - (mult1 * mult2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == divide[0]) {
@@ -208,7 +208,7 @@ exports.parseCustomOperators = function(expression, add, subtract, multiply, div
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (div1 / div2).toString() + expressionout.substr(i);
-      i--;
+      i -= divbefore.length() + divafter.length() + 1 - (div1 / div2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -241,7 +241,7 @@ exports.parseCustomOperators = function(expression, add, subtract, multiply, div
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (add1 + add2).toString() + expressionout.substr();
-      i--;
+      i -= addbefore.length() + addafter.length() + 1 - (add1 + add2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == subtract[0]) {
@@ -271,8 +271,8 @@ exports.parseCustomOperators = function(expression, add, subtract, multiply, div
       for (var k = 1; k <= subafter.length(); k++) {
         expressionout[i + k] = ' ';
       }
-      expressionout = expressionout.substr(0, i) + (sub1 + sub2).toString() + expressionout.substr();
-      i--;
+      expressionout = expressionout.substr(0, i) + (sub1 - sub2).toString() + expressionout.substr();
+      i -= subbefore.length() + subafter.length() + 1 - (sub1 - sub2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -324,7 +324,7 @@ function parseRecursive(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (mult1 * mult2).toString() + expressionout.substr(i);
-      i--;
+      i -= multbefore.length() + multafter.length() + 1 - (mult1 * mult2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == '/') {
@@ -355,7 +355,7 @@ function parseRecursive(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (div1 / div2).toString() + expressionout.substr(i);
-      i--;
+      i -= divbefore.length() + divafter.length() + 1 - (div1 / div2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == '(') {
@@ -400,7 +400,7 @@ function parseRecursive(expression) {
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (add1 + add2).toString() + expressionout.substr();
-      i--;
+      i -= addbefore.length() + addafter.length() + 1 - (add1 + add2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == '-') {
@@ -430,8 +430,8 @@ function parseRecursive(expression) {
       for (var k = 1; k <= subafter.length(); k++) {
         expressionout[i + k] = ' ';
       }
-      expressionout = expressionout.substr(0, i) + (sub1 + sub2).toString() + expressionout.substr();
-      i--;
+      expressionout = expressionout.substr(0, i) + (sub1 - sub2).toString() + expressionout.substr();
+      i -= subbefore.length() + subafter.length() + 1 - (sub1 - sub2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -471,7 +471,7 @@ function parseRecursiveCustom(expression, add, subtract, multiply, divide, open,
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (mult1 * mult2).toString() + expressionout.substr(i);
-      i--;
+      i -= multbefore.length() + multafter.length() + 1 - (mult1 * mult2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == divide[0]) {
@@ -502,7 +502,7 @@ function parseRecursiveCustom(expression, add, subtract, multiply, divide, open,
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (div1 / div2).toString() + expressionout.substr(i);
-      i--;
+      i -= divbefore.length() + divafter.length() + 1 - (div1 / div2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == open[0]) {
@@ -547,7 +547,7 @@ function parseRecursiveCustom(expression, add, subtract, multiply, divide, open,
         expressionout[i + k] = ' ';
       }
       expressionout = expressionout.substr(0, i) + (add1 + add2).toString() + expressionout.substr();
-      i--;
+      i -= addbefore.length() + addafter.length() + 1 - (add1 + add2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
     else if (expressionout[i] == subtract[0]) {
@@ -577,8 +577,8 @@ function parseRecursiveCustom(expression, add, subtract, multiply, divide, open,
       for (var k = 1; k <= subafter.length(); k++) {
         expressionout[i + k] = ' ';
       }
-      expressionout = expressionout.substr(0, i) + (sub1 + sub2).toString() + expressionout.substr();
-      i--;
+      expressionout = expressionout.substr(0, i) + (sub1 - sub2).toString() + expressionout.substr();
+      i -= subbefore.length() + subafter.length() + 1 - (sub1 - sub2).toString().length();
       expressionout = expressionout.replace(/\s+/g, '');
     }
   }
@@ -637,13 +637,53 @@ exports.parseMultipleVariables = function(expression, variables, variableValues)
   return parseFloat(parseRecursive(expressionout));
 }
 
-exports.parseScientific = function(expression) {
+exports.parseScientificSingle = function(expression) {
   var expressionout = expression;
 
   for (var i = 0; i < expressionout.length(); i++) {
     if (expressionout[i] == "e" || expressionout[i] == "E") {
       expressionout = parseFloat(expressionout.substr(0, i)) * Math.pow(10, parseFloat(expressionout.substr(i + 1)));
       break; 
+    }
+  }
+
+  return expressionout;
+}
+
+exports.parseScientific = function(expression) {
+  var expressionout = expression;
+
+  for (var i = 0; i < expressionout.length(); i++) {
+    if (expressionout[i] == "e" || expressionout[i] == "E") {
+      var before = "";
+      var curr = expressionout[i - 1];
+      var j = i - 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && curr != '*' && curr != '/' && curr != '(' && curr != ')' && j >= 0) {
+        before += curr;
+        j--;
+        curr = expressionout[j];
+      }
+      before = before.split().reverse().join();
+      var after = "";
+      curr = expressionout[i + 1];
+      j = i + 1;
+      while (curr != ' ' && curr != '+' && curr != '-' && curr != '*' && curr != '/' && curr != '(' && curr != ')' && j < expressionout.length()) {
+        after += curr;
+        j++;
+        curr = expressionout[j];
+      }
+      var num1 = parseFloat(before);
+      var num2 = parseFloat(after);
+      expressionout[i] = ' ';
+      for (var k = 1; k <= before.length(); k++) {
+        expressionout[i - k] = ' ';
+      }
+      for (var k = 1; k <= after.length(); k++) {
+        expressionout[i + k] = ' ';
+      }
+      expressionout = expressionout.substr(0, i) + (num1 * Math.pow(10, num2)).toString() + expressionout.substr(i + 1);
+      i -= before.length() + after.length() + 1 - (num1 * Math.pow(10, num2)).toString().length();
+      expressionout = expressionout.replace(/\s+/g, '');
     }
   }
 
